@@ -1,0 +1,3 @@
+<%= fields_for "strategy[strategy_record][complex_contingencies]", @strategy.strategy_record.complex_contingencies do |f| %>
+    <%= render 'complex_contingencies', :f => f %>
+<% end %>

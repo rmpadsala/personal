@@ -1,0 +1,10 @@
+<%= render 'logic_text_area' %>
+
+<%= f.hidden_field :submit_time, :value => current_local_time %>
+
+<br/><br/>
+<div align="right">
+	<%= link_to "Back", :back, class: "btn btn-default" %>
+	<%= link_to "Cancel", "#", class: "btn btn-primary" %>
+	<%= f.submit "Confirm Subscription", class: "btn btn-primary" %>
+</div>

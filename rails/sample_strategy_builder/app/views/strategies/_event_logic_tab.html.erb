@@ -1,0 +1,19 @@
+<%= render 'logic_text_area' %>
+<table class="table table-borderless table-condensed">
+	<tr>
+		<td><%= f.label "Event" %></td>
+		<td><%= f.label "Logic" %></td>
+		<td><%= f.label "Value" %></td>		
+	</tr>
+	<tr>
+		<%= render 'complex_strategy', :f => f %>
+	</tr>	
+</table>
+<tr>
+	<td><button class="btn btn-primary">OR</button></td>
+</tr>
+
+<br/><br/>
+<div align="right">		 	
+ 	<%= link_to "Next", "#", id: "nexttab", class: "btn btn-primary" %>	
+</div>

@@ -1,0 +1,10 @@
+<%= render 'logic_text_area' %>
+<%= f.label "Duration" %>
+<%= f.select(:duration, 
+	StrategiesController::DURATION) %>
+	
+<br/><br/>
+<div align="right">
+	<%= link_to "Back", :back, class: "btn btn-default" %>
+	<%= link_to "Next", "#", class: "btn btn-primary" %>
+</div>

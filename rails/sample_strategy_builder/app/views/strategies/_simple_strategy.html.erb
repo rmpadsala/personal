@@ -1,0 +1,23 @@
+<%= field_set_tag "Simple Strategy Information" do %>
+      <%= fields_for "strategy[strategy_record][simple_contingency]", @strategy.strategy_record.simple_contingency do |f| %>
+            <%= f.fields_for @strategy.strategy_record.simple_contingency.contingency_info do |record| %>
+            	<%= record.label :event %>
+                  <%= collection_select("strategy[strategy_record][simple_contingency][contingency_info]", :indicator_id, @indicators, :indicator_id, :indicator_name) %>            
+
+            	<%= record.label "Logic" %>
+            	<%= record.select(:logic, 
+            		StrategiesController::LOGIC) %>
+
+            	<%= record.label "Expected Value" %>
+            	<%= record.text_field :expected_value %>
+
+                  <%= record.label "Source (Default: NASDAQ)" %>
+                  <%= record.text_field :source, :value => '2' %>
+
+                  <%= record.label "Type (Default: ECONOMIC)" %>
+                  <%= record.text_field :strategy_type, :value => '1' %>
+
+            <% end %>
+      	
+      <% end %>
+<% end %> 

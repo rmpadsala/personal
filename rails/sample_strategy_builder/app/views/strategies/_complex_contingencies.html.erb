@@ -1,0 +1,3 @@
+<%= f.fields_for "[contingency_info][]", @strategy.strategy_record.complex_contingencies.contingency_info.first do |basket| %>
+    <%= render 'basket_contingencies', :f => basket %>
+<% end %>

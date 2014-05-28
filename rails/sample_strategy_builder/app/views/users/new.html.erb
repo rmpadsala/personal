@@ -1,0 +1,30 @@
+<% provide(:title, 'Create Users') %>
+<h1>Create Users</h1>
+<div class="row">
+	<div class="span3 offset3">
+      <%= form_for @user do |f| %>  
+            <% if @user.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-error">
+                  The form contains <%= pluralize(@user.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                  <li>* <%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <%= f.hidden_field :id %>  	
+
+      	<%= f.label "First Name" %>
+      	<%= f.text_field :first_name %>
+
+      	<%= f.label "Last Name" %>
+      	<%= f.text_field :last_name %>      
+
+            <%= f.submit "Create User", class: "btn btn-large btn-primary" %>
+      <% end %>
+	</div>
+</div>

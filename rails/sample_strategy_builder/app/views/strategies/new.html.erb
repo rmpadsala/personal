@@ -1,0 +1,39 @@
+<% provide(:title, 'Create Sample Events') %>
+<div align='left'>
+  <h3>Create Strategy</h3><br/><br/>
+</div>
+<div class="hero-unit"> 
+      <%= form_for @strategy, :url => strategies_path do |f| %>
+        <%= f.fields_for @strategy.strategy_record do |record| %>  
+          <div id="content">        
+              <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                  <li class="active"><a href="#eventLogic" data-toggle="tab">1. Event Logic</a></li>
+                  <li><a href="#orderExecution" data-toggle="tab">2. Order Execution</a></li>
+                  <li><a href="#executionTiming" data-toggle="tab">3. Execution Timing</a></li>
+                  <li><a href="#previewAndSubmit" data-toggle="tab">4. Preview and Submit</a></li>
+              </ul>
+              <div id="create-strategy-tab-content" class="tab-content">
+                  <%= record.hidden_field :algofast_user_id, :value => '6' %>
+                  <%= record.hidden_field :strategy_matrix_type, value: 3 %> 
+
+                  <%= record.hidden_field :exec_platform, :value => "1" %>
+
+                  <div class="tab-pane active" id="eventLogic">
+                      <%= render 'event_logic_tab', :f => record %>
+                  </div>
+                  <div class="tab-pane" id="orderExecution">
+                      <%= render 'order_execution_tab', :f => record  %>        
+                  </div>
+                  <div class="tab-pane" id="executionTiming">                  
+                      <%= render 'execution_timing_tab', :f => record  %>
+                  </div>
+                  <div class="tab-pane" id="previewAndSubmit">
+                      <%= render 'preview_and_submit_tab', :f => record  %>
+                  </div>            
+              </div>
+          </div>
+        <% end %>
+      <% end %>
+</div>
+
+

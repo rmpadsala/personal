@@ -1,0 +1,11 @@
+<td class="col-sm-1"><%= f.collection_select(:indicator_id, @indicators, :indicator_id, :indicator_name) %></td>
+
+<td class="col-sm-2"><%= f.select(:logic, 
+      StrategiesController::LOGIC) %></td>
+<td class="col-sm-3"><%= f.text_field :expected_value %></td>
+<td><button class="btn btn-primary">AND</button></td>
+
+<%= f.hidden_field :source, value: '2'%>
+
+<!-- economic/ corportate/ something else -->
+<%= f.hidden_field :strategy_type, value: '1' %>
