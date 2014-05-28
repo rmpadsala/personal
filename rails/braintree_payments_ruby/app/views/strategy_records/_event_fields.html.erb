@@ -1,0 +1,8 @@
+<td><%= f.collection_select(:indicator_id, @indicators, :indicator_id, :indicator_name) %></td>
+<td><%= f.select(:logic,  
+      StrategyRecordsController::LOGIC) %></td>
+<td><%= f.text_field :expected_value %></td>
+<%= f.hidden_field :source, value: '2'%>
+
+<!-- economic/ corportate/ something else -->
+<%= f.hidden_field :strategy_type, value: '1' %>

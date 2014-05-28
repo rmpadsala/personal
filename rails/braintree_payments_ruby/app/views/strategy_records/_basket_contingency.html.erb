@@ -1,0 +1,18 @@
+<div id="basket">
+	<%= f.fields_for :basket_contingencies do |basket| %>
+	 	<tbody class="fields" id="basket_fields">	 		
+			<tr>
+				<td><%= basket.label "Event" %></td>
+				<td><%= basket.label "Logic" %></td>
+				<td><%= basket.label "Value" %></td>
+				<td>					
+					<%= link_to_remove_fields "x", basket %>
+				</td>
+			</tr>
+			<%= render 'contingency_info', :f => basket %>	
+			<tr>
+				<td><button class="btn btn-primary">OR</button></td>	
+			</tr>			
+		</tbody>
+	<% end %>
+</div>

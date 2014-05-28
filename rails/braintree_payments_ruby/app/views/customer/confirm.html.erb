@@ -1,0 +1,15 @@
+<dl class="dl-horizontal">  
+  <p>Payment infomration successfully saved</p>  
+  <dt>First Name</dt>
+  <dd><%= @result.customer.first_name %></dd>
+  <dt>Last Name</dt>
+  <dd><%= @result.customer.last_name %></dd>
+  <dt>Phone</dt>
+  <dd><%= @result.customer.phone %></dd>
+  <dt>Credit Card</dt>
+  <% @result.customer.credit_cards.each do |cc| %>
+    <dd><%= cc.masked_number %></dd>
+  <% end %>  
+</dt>
+</dl></br>
+

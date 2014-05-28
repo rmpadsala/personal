@@ -1,0 +1,15 @@
+defaults: &defaults	
+    braintree_merchant_id: "<sandbox-key>"
+    braintree_public_key: "<sandbox-key>"
+    braintree_private_key: "<sandbox-key>"
+
+development:
+    <<: *defaults
+
+test:
+    <<: *defaults
+
+production:	
+    braintree_merchant_id: "<production-key>"
+    braintree_public_key: "<production-key>"
+    braintree_private_key: "<production-key>"

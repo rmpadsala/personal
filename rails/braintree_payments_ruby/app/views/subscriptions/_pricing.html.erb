@@ -1,0 +1,19 @@
+<ol type="A">
+	<% if !current_algofast_user.is_subscribed_to_NASDAQ? %>	
+		<li><strong>NASDAQ </strong><%= link_to "(subscribe)", new_subscription_path(:subscription_id => :AF_NASDAQ_01) %></li>	
+		<p><em><i class="icon-info-sign"></i> NASDAQ subscription cost is <strong>$250.00/per month</strong></em></p>
+	<% end %>
+
+	<% if !current_algofast_user.is_subscribed_to_thompson_reuters? %>	
+		<li><strong>Thompson Reuters </strong><%= link_to "(subscribe)", new_subscription_path(:subscription_id => :AF_TR_01) %></li>
+		<p><em><i class="icon-info-sign"></i> Thompson reuters subscription cost is <strong>$250.00/per month</strong></em></p>
+	<% end %>
+	
+	<li><strong>One Time Activation </strong><%= link_to "(subscribe)", new_subscription_path(:subscription_id => 
+			:AF_SINGLE_ACTIVATION_01) %></em></li>
+	<p><em><i class="icon-info-sign"></i> One time activation cost is <strong>$10</strong> when strategy is created and <strong>$2/per month</strong> until strategy triggers or cancelled or expired</em></p>
+	<br />
+	<div class="center">
+		<%= link_to "Back",	:back, class: "btn btn-medium btn-primary" %>
+	</div>
+</ol>

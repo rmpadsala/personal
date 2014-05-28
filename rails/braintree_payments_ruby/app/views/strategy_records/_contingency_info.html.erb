@@ -1,0 +1,11 @@
+<div id="single">
+	<%= f.fields_for :contingency_infos do |contingency| %>	
+		<tr class="fields" id="event_fields">
+			<%= render 'event_fields', :f => contingency %>
+			<td><button class="btn btn-primary">AND</button></td>		
+			<td>
+				<%= link_to_remove_fields "x", f %>
+			</td>
+		</tr>
+	<% end %>	
+</div>

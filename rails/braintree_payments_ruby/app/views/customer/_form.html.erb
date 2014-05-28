@@ -1,0 +1,68 @@
+<% if @result && !@result.success? %>  
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      The form contains <%= pluralize(@result.errors.size, "error") %>.
+    </div>
+    <ul>
+      <% @result.errors.each do |msg| %>
+        <li>* <%= msg.message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for :customer,
+      :url => Braintree::TransparentRedirect.url,
+      :params => @result && @result.params[:customer],
+      :errors => @result && @result.errors.for(:customer) do |f| %> 
+  <%= f.hidden_field :email, value: current_algofast_user.email %>
+  <!-- Uncomment following lines of code when migrate to algofast_web version
+  <%= f.hidden_field :phone, value: current_algofast_user.phone %>
+  <%= f.hidden_field :first_name, value: current_algofast_user.first_name %>
+  <%= f.hidden_field :last_name, value: current_algofast_user.last_name %> -->
+  <%= field_set_tag "Card Holder Information" do %>
+    <% f.fields_for :credit_card do |cc| %>
+      <dl class="dl-horizontal">        
+        <dt><%= cc.label :cardholder_name, 'Full Name' %></dt>
+        <dd><%= cc.text_field :cardholder_name %></dd>
+        <dt><%= cc.label :number, 'Number' %></dt>
+        <dd>
+          <%= cc.text_field :number, autocomplete: :off %>
+          <% if Rails.env.development? %>
+            <%= link_to "Test Credit Cards", "https://www.braintreepayments.com/docs/ruby/reference/sandbox" %>
+          <% end %>
+        </dd>
+        <dt><%= cc.label :cvv, 'CVV' %></dt>
+        <dd><%= cc.text_field :cvv %></dd>
+        <div class="field">
+          <dt><%= cc.label "Expiration Date" %></dt>
+          <dd><%= select_tag "customer[credit_card][expiration_month]", options_for_select((1..12)), class: "span1 pull-left" %>
+          <%= select_tag "customer[credit_card][expiration_year]", options_for_select((@year.to_i..(@year.to_i + 10))), class: "span2 pull-left" %></dd>
+        </div>
+        <!--Braintree API do allow transaction without billing address. Uncomment following line of code whenever we do require billing address information.
+        <%= field_set_tag "Billing Address" do %>
+          <% cc.fields_for :billing_address do |addr| %>
+            <dt><%= addr.label :street_address, 'Address Line 1' %></dt>
+            <dd><%= addr.text_field :street_address %></dd>
+            <dt><%= addr.label :extended_address, 'Address Line 2' %></dt>
+            <dd><%= addr.text_field :extended_address %></dd>
+            <dt><%= addr.label :locality, 'City' %></dt>
+            <dd><%= addr.text_field :locality %></dd>
+            <dt><%= addr.label :region, 'State/ Province/ Region' %></dt>
+            <dd><%= addr.text_field :region %></dd>
+            <dt><%= addr.label :postal_code, 'Zip Code' %></dt>
+            <dd><%= addr.text_field :postal_code %></dd>
+            <dt><%= addr.label :country_name, 'Country' %></dt>
+            <dd><%= addr.text_field :country_name %></dd>
+          <% end %>
+        <% end %>-->
+      </dl>
+    <% end %>
+  <% end %>
+  <%= hidden_field_tag :tr_data, @tr_data %>  
+  <div class="center">
+    <%= f.submit 'Add Payment Info', class: "btn btn-primary btn-default" %>
+    <%= link_to 'Cancel', info_subscription_path, 
+        class: "btn btn-primary btn-default" %>
+  </div>
+<% end %>

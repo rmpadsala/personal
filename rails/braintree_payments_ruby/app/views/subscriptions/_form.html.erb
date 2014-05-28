@@ -1,0 +1,25 @@
+<% if @subscription_result && !@subscription_result.success? %>  
+  <div id="error_explanation">    
+    <ul>
+      <% @subscription_result.errors.each do |msg| %>
+        <li>*Subscription failed, <%= msg.message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(@subscription) do |f| %>	
+	<%= render "preview_subscription", :subscription => @subscription.name %>
+	<%= f.hidden_field :name, value: @subscription.name %>
+	<%= f.hidden_field :description, value: @subscription.description %>
+	<%= f.hidden_field :payment_token, value: @subscription.payment_token %>
+	<%= f.hidden_field :algofast_user_id, value: @subscription.algofast_user_id %>
+	<%= f.hidden_field :braintree_customer_id, value: @subscription.braintree_customer_id %>	
+
+	</br>
+
+	<div align="center">
+		<%= link_to "Back", info_subscription_path, class: "btn btn-medium btn-primary" %>
+ 		<%= f.submit "Confirm Subscription", class: "btn btn-medium btn-success" %>
+	</div>
+<% end %>

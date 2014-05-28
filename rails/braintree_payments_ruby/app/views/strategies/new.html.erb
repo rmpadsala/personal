@@ -1,0 +1,8 @@
+<div class="center hero-unit">
+	<h3>Create Strategy</h3>
+	<% if current_algofast_user.is_registered_with_braintree? %>
+		<%= link_to "Create Strategy", new_strategy_record_path, class: "btn btn-large btn-primary" %>
+	<% else %>
+		<%= link_to "Subscribe now!", info_subscription_path, class: "btn btn-large btn-primary" %>
+	<% end %>
+</div>

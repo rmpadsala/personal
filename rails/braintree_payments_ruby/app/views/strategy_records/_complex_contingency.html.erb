@@ -1,0 +1,10 @@
+<div id="complex">
+	<table class="table table-borderless table-condensed">			
+		<%= f.fields_for :complex_contingency do |complex| %>
+			<%= render 'basket_contingency', :f => complex %>
+		<% end %>
+	</table>
+</div>
+
+
+

@@ -1,0 +1,18 @@
+<div class="center">
+	<h1>Preview Subscription</h1></br></br>
+</div>
+
+<dl>
+	<% if subscription == :AF_NASDAQ_01.to_s %>	
+		<dt>NASDAQ</dt>
+		<dd><p><em>NASDAQ subscription cost is <strong>$250.00/per month</strong></em></p></dd>
+	<% elsif subscription == :AF_TR_01.to_s %>
+		<dt>Thompson Reuters</dt>
+		<dd><p><em>Thompson reuters subscription cost is <strong>$250.00/per month</strong></em></p></dd>
+	<% elsif subscription == :AF_SINGLE_ACTIVATION_01.to_s %>
+		<dt>One Time Activation</dt>
+		<dd><p><em>One time activation cost is <strong>$10</strong> when strategy is created and <strong>$2/per month</strong> until strategy triggers or cancelled or expired</em></p></dd>
+	<% end %>
+</dl>
+
+	

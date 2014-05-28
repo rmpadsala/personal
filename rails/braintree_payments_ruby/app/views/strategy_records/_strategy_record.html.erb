@@ -1,0 +1,32 @@
+<%= form_for @strategy_record do |f| %>
+	<div id="content">        
+      <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+          <li class="active"><a href="#event_logic" data-toggle="tab">1. Event Logic</a></li>
+          <li><a href="#order_execution" data-toggle="tab">2. Order Execution</a></li>
+          <li><a href="#execution_timing" data-toggle="tab">3. Execution Timing</a></li>
+          <li><a href="#preview_submit" data-toggle="tab">4. Preview and Submit</a></li>
+      </ul>
+      <div id="create-strategy-tab-content" class="tab-content">
+          <%= render 'logic_text_area' %>
+          <%= f.hidden_field :algofast_user_id, :value => 6 %>
+          <%= f.hidden_field :strategy_matrix_type, value: 3 %> 
+          <%= f.hidden_field :exec_platform, :value => 1 %>
+
+          <div class="tab-pane active" id="event_logic">
+              <%= render 'event_logic_tab', :f => f %>
+          </div>
+
+          <div class="tab-pane" id="order_execution" >
+              <%= render 'order_execution_tab', :f => f %>              
+          </div>
+
+          <div class="tab-pane" id="execution_timing">
+              <%= render 'execution_timing_tab', :f => f %>
+          </div>
+          
+          <div class="tab-pane" id="preview_submit">
+              <%= render 'preview_submit_tab', :f => f %>  
+          </div>
+      </div>
+  </div>
+<% end %>

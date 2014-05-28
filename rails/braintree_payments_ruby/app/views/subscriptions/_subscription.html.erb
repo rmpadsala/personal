@@ -1,0 +1,20 @@
+<tr>
+	<td><%= subscription.id %></td>	
+	<td><%= subscription.description %></td>	
+	<td><%= subscription.algofast_user_id %></td>
+	<td><a href="#cancel_subscription_modal<%= subscription.id%>" role="button" class="btn btn-danger btn-small" data-toggle="modal">Cancel</a></td>	
+</tr>
+
+<div class="modal fade" id="cancel_subscription_modal<%= subscription.id %>">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">&times;</a>
+		<h3>Are you sure?</h3>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to cancel this subscription?</p>
+	</div>
+	<div class="modal-footer">
+		<%= link_to "Cancel Subscription", subscription, class: "btn btn-danger btn-small", method: :delete %>
+		<a href="#" class="btn btn-small btn-primary" data-dismiss="modal">Close</a>    
+	</div>
+</div>

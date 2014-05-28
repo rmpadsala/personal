@@ -1,0 +1,53 @@
+<% if @result && !@result.success? %>  
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      The form contains <%= pluralize(@result.errors.size, "error") %>.
+    </div>
+    <ul>
+      <% @result.errors.each do |msg| %>
+        <li>* <%= msg.message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for :customer,
+      :url => Braintree::TransparentRedirect.url,
+      :params => @result && @result.params[:customer],
+      :existing => current_algofast_user,      
+      :errors => @result && @result.errors.for(:customer) do |f| %>  
+  <%= f.hidden_field :email, value: current_algofast_user.email %>
+  <!-- Uncomment following lines of code when migrate to algofast_web version
+  <%= f.hidden_field :phone, value: current_algofast_user.phone %>
+  <%= f.hidden_field :first_name, value: current_algofast_user.first_name %>
+  <%= f.hidden_field :last_name, value: current_algofast_user.last_name %> -->
+  <%= field_set_tag "Credit Card" do %>
+    <% f.fields_for :credit_card do |cc| %>
+      <dl class="dl-horizontal">
+        <dt><%= cc.label :cardholder_name, 'Full Name' %></dt>
+        <dd><%= cc.text_field :cardholder_name, value: current_algofast_user.default_credit_card.cardholder_name %></dd>
+        <dt><%= cc.label :number, 'Number' %></dt>
+        <dd>
+          <%= cc.text_field :number, placeholder: current_algofast_user.default_credit_card.masked_number,autocomplete: :off %>
+          <% if Rails.env.development? %>
+            <%= link_to "Test Credit Cards", "https://www.braintreepayments.com/docs/ruby/reference/sandbox" %>
+          <% end %>
+        </dd>
+        </dd>        
+        <dt><%= cc.label :cvv, 'CVV' %></dt>
+        <dd><%= cc.text_field :cvv %></dd>
+        <div class="field">
+          <dt><%= cc.label "Expiration Date" %></dt>
+          <dd><%= select_tag "customer[credit_card][expiration_month]", options_for_select((1..12), current_algofast_user.default_credit_card.expiration_month.to_i), class: "span1 pull-left" %>
+          <%= select_tag "customer[credit_card][expiration_year]", options_for_select((@year.to_i..(@year.to_i + 15)), current_algofast_user.default_credit_card.expiration_year.to_i), class: "button span2 pull-left" %></dd>
+        </div>        
+      </dl>
+    <% end %>
+  <% end %>  
+  <%= hidden_field_tag :tr_data, @tr_data %>  
+  <div class="center">
+    <%= f.submit 'Save Payment Info', class: "btn btn-primary btn-default" %>
+    <%= link_to 'Cancel', subscriptions_path, 
+        class: "btn btn-primary btn-default" %>
+  </div>
+<% end %>

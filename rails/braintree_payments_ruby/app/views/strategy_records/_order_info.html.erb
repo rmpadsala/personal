@@ -1,0 +1,23 @@
+<%= f.fields_for :order_infos do |order_fields| %>
+	<%= order_fields.fields_for :contract_info do |contract_info| %>
+    	<%= contract_info.label "Contract" %>
+    	<%= contract_info.text_field :contract %>
+
+		<%= contract_info.label "Contract Type" %>
+    	<%= contract_info.select(:contract_type, StrategyRecordsController::CONTRACT_TYPES) %>  
+    <% end %>
+
+	<%= order_fields.label "Qty" %>
+	<%= order_fields.text_field :qty %>
+
+	<%= order_fields.label "Price" %>
+	<%= order_fields.text_field :price %>
+
+	<%= order_fields.label "Order Duration" %>
+    <%= order_fields.select(:order_tif, StrategyRecordsController::ORDER_DURATIONS) %>
+
+    <%= order_fields.label "Order Type" %>
+    <%= order_fields.select(:order_type, StrategyRecordsController::ORDER_TYPES) %>
+    
+    <%= order_fields.hidden_field :routing_account, :value => '37733449' %>
+<% end %>
